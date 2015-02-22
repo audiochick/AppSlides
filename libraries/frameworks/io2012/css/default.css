@@ -1274,7 +1274,7 @@ article.smaller q:before, article.smaller q:after {
 /* line 884, ../scss/default.scss */
 aside.gdbar {
   height: 97px;
-  width: 215px;
+  width: 400px;
   position: absolute;
   left: -1px;
   top: 125px;
@@ -1283,12 +1283,12 @@ aside.gdbar {
   -ms-border-radius: 0 10px 10px 0;
   -o-border-radius: 0 10px 10px 0;
   border-radius: 0 10px 10px 0;
-  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #e6e6e6), color-stop(100%, #e6e6e6)) no-repeat;
-  background: -webkit-linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
-  background: -moz-linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
-  background: -o-linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
-  background: -ms-linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
-  background: linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
+  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #1a1a1a), color-stop(100%, #000)) no-repeat;
+  background: -webkit-linear-gradient(left, #fafafa, #E6E6E6) no-repeat;
+  background: -moz-linear-gradient(left, #fafafa, #E6E6E6) no-repeat;
+  background: -o-linear-gradient(left, #fafafa, #E6E6E6) no-repeat;
+  background: -ms-linear-gradient(left, #fafafa, #E6E6E6) no-repeat;
+  background: linear-gradient(left, #fafafa, #E6E6E6) no-repeat;
   -webkit-background-size: 0% 100%;
   -moz-background-size: 0% 100%;
   -o-background-size: 0% 100%;
@@ -1329,7 +1329,8 @@ aside.gdbar.bottom {
 }
 /* line 913, ../scss/default.scss */
 aside.gdbar img {
-  width: 125px;
+  width: auto;
+  background: transparent;
   height: 85px;
   position: absolute;
   right: 0;

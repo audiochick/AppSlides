@@ -3,22 +3,83 @@ title       : Comparing US statistics
 subtitle    : Using State divisions and States to compare Data
 author      : AudioChick
 job         : Analytical Programmer
+logo        : poct-logo.png
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [mathjax, quiz, bootstrap]
+ext_widgets : {rCharts: ["libraries/highcharts","libraries/nvd3", "libraries/morris", "libraries/leaflet", "libraries/rickshaw"]}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F, results='hide'}
+# make this an external chunk that can be included in any file
+library(knitr)
+library(datasets)
+
+options(width = 100)
+opts_chunk$set(message = F, error = F, warning = F, comment = NA, fig.align = 'center', dpi = 100, tidy = F, cache.path = '.cache/', fig.path = 'fig/')
+
+options(xtable.type = 'html')
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+knit_hooks$set(plot = knitr:::hook_plot_html)
+runif(1)
+```
 
 ## Introduction
-
+Compiled US sensus data of all 50 states grouped by divisions to ease comparison of data
+<img src="assets/img/AAGRegionalDivisions.jpg" style="margin-top:0px;margin-left:110px;"/>
 
 
 --- .class #id 
 
-## Slide 2
+## Comparing Data
+Data collected duing a US census in 1977.
+  - Population data
+  - State area
+  - Murder Rate
+  - Illiteracy Rate
+  - High School Graduation Rate
+  - Income
+  - Frost
+  - Life Expectancy
+  
 
+---
+## Zoom into divisions
+<p>Compare specific statistics based on State division</p>
 
+```{r echo = F, results = 'asis'}
+require(rCharts)
 
+data <- data.frame(state.x77, state.division)
+data <- data.frame(data, state.abb)
+
+n1 <- nPlot(Murder ~ state.division, group = 'state.division', type = 'multiBarChart',
+  data = data
+)
+
+n1$print('chart1')
+```
+
+Figure: Murder rate of all states grouped by state division
+
+--- .class #id 
+
+## Customize views
+<p>Select division and statistic to update the chart interactively</p>
+  - Quick interactive access to relevant data
+  - Easy comparison ability
+  - Quick access to information
+
+--- .class #id 
+
+## Questions?
+<img src="assets/img/ask-the-right-questions.jpg" style="width: 650px;margin-left: 300px;margin-top: 14px;"/>
 

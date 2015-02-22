@@ -13,7 +13,17 @@
     media="only screen and (max-device-width: 480px)" >
   <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
   <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
-  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="libraries/widgets/nvd3/css/nv.d3.css"></link>
+<link rel=stylesheet href="libraries/widgets/nvd3/css/rNVD3.css"></link>
+<link rel=stylesheet href="libraries/widgets/morris/css/morris.css"></link>
+<link rel=stylesheet href="libraries/widgets/leaflet/external/leaflet.css"></link>
+<link rel=stylesheet href="libraries/widgets/leaflet/external/leaflet-rCharts.css"></link>
+<link rel=stylesheet href="libraries/widgets/leaflet/external/legend.css"></link>
+<link rel=stylesheet href="libraries/widgets/rickshaw/css/rickshaw.min.css"></link>
+<link rel=stylesheet href="libraries/widgets/rickshaw/css/jquery-ui.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
 
   
   <!-- Grab CDN jQuery, fall back to local if offline -->
@@ -23,7 +33,24 @@
     src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
   </script>
   
-  
+  <script src="libraries/widgets/highcharts/js/jquery-1.9.1.min.js"></script>
+<script src="libraries/widgets/highcharts/js/highcharts.js"></script>
+<script src="libraries/widgets/highcharts/js/highcharts-more.js"></script>
+<script src="libraries/widgets/highcharts/js/exporting.js"></script>
+<script src="libraries/widgets/nvd3/js/jquery-1.8.2.min.js"></script>
+<script src="libraries/widgets/nvd3/js/d3.v3.min.js"></script>
+<script src="libraries/widgets/nvd3/js/nv.d3.min-new.js"></script>
+<script src="libraries/widgets/nvd3/js/fisheye.js"></script>
+<script src="libraries/widgets/morris/js/raphael-2.1.0.min.js"></script>
+<script src="libraries/widgets/morris/js/morris.min.js"></script>
+<script src="libraries/widgets/leaflet/external/leaflet.js"></script>
+<script src="libraries/widgets/leaflet/external/leaflet-providers.js"></script>
+<script src="libraries/widgets/leaflet/external/Control.FullScreen.js"></script>
+<script src="libraries/widgets/rickshaw/js/d3.v2.min.js"></script>
+<script src="libraries/widgets/rickshaw/js/rickshaw.min.js"></script>
+<script src="libraries/widgets/rickshaw/js/jquery.min.js"></script>
+<script src="libraries/widgets/rickshaw/js/jquery-ui.min.js"></script>
+
 
 </head>
 <body style="opacity: 0">
@@ -31,6 +58,9 @@
     
     <!-- LOGO SLIDE -->
         <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/poct-logo.png">
+  </aside>
   <hgroup class="auto-fadein">
     <h1>Comparing US statistics</h1>
     <h2>Using State divisions and States to compare Data</h2>
@@ -46,20 +76,8 @@
     <h2>Introduction</h2>
   </hgroup>
   <article data-timings="">
-    <p>Compare various state statistics:</p>
-
-<ul>
-<li>Population, </li>
-<li>Income, </li>
-<li>Illiteracy, </li>
-<li>Life Expectancy, </li>
-<li>Murder Rate, </li>
-<li>High school graduates, </li>
-<li>Frost and </li>
-<li>Area</li>
-</ul>
-
-<p>State Statistics are filtered by State Division.</p>
+    <p>Compiled US sensus data of all 50 states grouped by divisions to ease comparison of data
+<img src="assets/img/AAGRegionalDivisions.jpg" style="margin-top:0px;margin-left:110px;"/></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -67,10 +85,731 @@
 
 <slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Slide 2</h2>
+    <h2>Comparing Data</h2>
   </hgroup>
   <article data-timings="">
-    
+    <p>Data collected duing a US census in 1977.</p>
+
+<ul>
+<li>Population data</li>
+<li>State area</li>
+<li>Murder Rate</li>
+<li>Illiteracy Rate</li>
+<li>High School Graduation Rate</li>
+<li>Income</li>
+<li>Frost</li>
+<li>Life Expectancy</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Zoom into divisions</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Compare specific statistics based on State division</p>
+
+<div id = 'chart1' class = 'rChart nvd3'></div>
+
+<script type='text/javascript'>
+ $(document).ready(function(){
+      drawchart1()
+    });
+    function drawchart1(){  
+      var opts = {
+ "dom": "chart1",
+"width":    800,
+"height":    400,
+"x": "state.division",
+"y": "Murder",
+"group": "state.division",
+"type": "multiBarChart",
+"id": "chart1" 
+},
+        data = [
+ {
+ "Population":           3615,
+"Income":           3624,
+"Illiteracy":            2.1,
+"Life.Exp":          69.05,
+"Murder":           15.1,
+"HS.Grad":           41.3,
+"Frost":             20,
+"Area":          50708,
+"state.division": "East South Central",
+"state.abb": "AL" 
+},
+{
+ "Population":            365,
+"Income":           6315,
+"Illiteracy":            1.5,
+"Life.Exp":          69.31,
+"Murder":           11.3,
+"HS.Grad":           66.7,
+"Frost":            152,
+"Area":         566432,
+"state.division": "Pacific",
+"state.abb": "AK" 
+},
+{
+ "Population":           2212,
+"Income":           4530,
+"Illiteracy":            1.8,
+"Life.Exp":          70.55,
+"Murder":            7.8,
+"HS.Grad":           58.1,
+"Frost":             15,
+"Area":         113417,
+"state.division": "Mountain",
+"state.abb": "AZ" 
+},
+{
+ "Population":           2110,
+"Income":           3378,
+"Illiteracy":            1.9,
+"Life.Exp":          70.66,
+"Murder":           10.1,
+"HS.Grad":           39.9,
+"Frost":             65,
+"Area":          51945,
+"state.division": "West South Central",
+"state.abb": "AR" 
+},
+{
+ "Population":          21198,
+"Income":           5114,
+"Illiteracy":            1.1,
+"Life.Exp":          71.71,
+"Murder":           10.3,
+"HS.Grad":           62.6,
+"Frost":             20,
+"Area":         156361,
+"state.division": "Pacific",
+"state.abb": "CA" 
+},
+{
+ "Population":           2541,
+"Income":           4884,
+"Illiteracy":            0.7,
+"Life.Exp":          72.06,
+"Murder":            6.8,
+"HS.Grad":           63.9,
+"Frost":            166,
+"Area":         103766,
+"state.division": "Mountain",
+"state.abb": "CO" 
+},
+{
+ "Population":           3100,
+"Income":           5348,
+"Illiteracy":            1.1,
+"Life.Exp":          72.48,
+"Murder":            3.1,
+"HS.Grad":             56,
+"Frost":            139,
+"Area":           4862,
+"state.division": "New England",
+"state.abb": "CT" 
+},
+{
+ "Population":            579,
+"Income":           4809,
+"Illiteracy":            0.9,
+"Life.Exp":          70.06,
+"Murder":            6.2,
+"HS.Grad":           54.6,
+"Frost":            103,
+"Area":           1982,
+"state.division": "South Atlantic",
+"state.abb": "DE" 
+},
+{
+ "Population":           8277,
+"Income":           4815,
+"Illiteracy":            1.3,
+"Life.Exp":          70.66,
+"Murder":           10.7,
+"HS.Grad":           52.6,
+"Frost":             11,
+"Area":          54090,
+"state.division": "South Atlantic",
+"state.abb": "FL" 
+},
+{
+ "Population":           4931,
+"Income":           4091,
+"Illiteracy":              2,
+"Life.Exp":          68.54,
+"Murder":           13.9,
+"HS.Grad":           40.6,
+"Frost":             60,
+"Area":          58073,
+"state.division": "South Atlantic",
+"state.abb": "GA" 
+},
+{
+ "Population":            868,
+"Income":           4963,
+"Illiteracy":            1.9,
+"Life.Exp":           73.6,
+"Murder":            6.2,
+"HS.Grad":           61.9,
+"Frost":              0,
+"Area":           6425,
+"state.division": "Pacific",
+"state.abb": "HI" 
+},
+{
+ "Population":            813,
+"Income":           4119,
+"Illiteracy":            0.6,
+"Life.Exp":          71.87,
+"Murder":            5.3,
+"HS.Grad":           59.5,
+"Frost":            126,
+"Area":          82677,
+"state.division": "Mountain",
+"state.abb": "ID" 
+},
+{
+ "Population":          11197,
+"Income":           5107,
+"Illiteracy":            0.9,
+"Life.Exp":          70.14,
+"Murder":           10.3,
+"HS.Grad":           52.6,
+"Frost":            127,
+"Area":          55748,
+"state.division": "East North Central",
+"state.abb": "IL" 
+},
+{
+ "Population":           5313,
+"Income":           4458,
+"Illiteracy":            0.7,
+"Life.Exp":          70.88,
+"Murder":            7.1,
+"HS.Grad":           52.9,
+"Frost":            122,
+"Area":          36097,
+"state.division": "East North Central",
+"state.abb": "IN" 
+},
+{
+ "Population":           2861,
+"Income":           4628,
+"Illiteracy":            0.5,
+"Life.Exp":          72.56,
+"Murder":            2.3,
+"HS.Grad":             59,
+"Frost":            140,
+"Area":          55941,
+"state.division": "West North Central",
+"state.abb": "IA" 
+},
+{
+ "Population":           2280,
+"Income":           4669,
+"Illiteracy":            0.6,
+"Life.Exp":          72.58,
+"Murder":            4.5,
+"HS.Grad":           59.9,
+"Frost":            114,
+"Area":          81787,
+"state.division": "West North Central",
+"state.abb": "KS" 
+},
+{
+ "Population":           3387,
+"Income":           3712,
+"Illiteracy":            1.6,
+"Life.Exp":           70.1,
+"Murder":           10.6,
+"HS.Grad":           38.5,
+"Frost":             95,
+"Area":          39650,
+"state.division": "East South Central",
+"state.abb": "KY" 
+},
+{
+ "Population":           3806,
+"Income":           3545,
+"Illiteracy":            2.8,
+"Life.Exp":          68.76,
+"Murder":           13.2,
+"HS.Grad":           42.2,
+"Frost":             12,
+"Area":          44930,
+"state.division": "West South Central",
+"state.abb": "LA" 
+},
+{
+ "Population":           1058,
+"Income":           3694,
+"Illiteracy":            0.7,
+"Life.Exp":          70.39,
+"Murder":            2.7,
+"HS.Grad":           54.7,
+"Frost":            161,
+"Area":          30920,
+"state.division": "New England",
+"state.abb": "ME" 
+},
+{
+ "Population":           4122,
+"Income":           5299,
+"Illiteracy":            0.9,
+"Life.Exp":          70.22,
+"Murder":            8.5,
+"HS.Grad":           52.3,
+"Frost":            101,
+"Area":           9891,
+"state.division": "South Atlantic",
+"state.abb": "MD" 
+},
+{
+ "Population":           5814,
+"Income":           4755,
+"Illiteracy":            1.1,
+"Life.Exp":          71.83,
+"Murder":            3.3,
+"HS.Grad":           58.5,
+"Frost":            103,
+"Area":           7826,
+"state.division": "New England",
+"state.abb": "MA" 
+},
+{
+ "Population":           9111,
+"Income":           4751,
+"Illiteracy":            0.9,
+"Life.Exp":          70.63,
+"Murder":           11.1,
+"HS.Grad":           52.8,
+"Frost":            125,
+"Area":          56817,
+"state.division": "East North Central",
+"state.abb": "MI" 
+},
+{
+ "Population":           3921,
+"Income":           4675,
+"Illiteracy":            0.6,
+"Life.Exp":          72.96,
+"Murder":            2.3,
+"HS.Grad":           57.6,
+"Frost":            160,
+"Area":          79289,
+"state.division": "West North Central",
+"state.abb": "MN" 
+},
+{
+ "Population":           2341,
+"Income":           3098,
+"Illiteracy":            2.4,
+"Life.Exp":          68.09,
+"Murder":           12.5,
+"HS.Grad":             41,
+"Frost":             50,
+"Area":          47296,
+"state.division": "East South Central",
+"state.abb": "MS" 
+},
+{
+ "Population":           4767,
+"Income":           4254,
+"Illiteracy":            0.8,
+"Life.Exp":          70.69,
+"Murder":            9.3,
+"HS.Grad":           48.8,
+"Frost":            108,
+"Area":          68995,
+"state.division": "West North Central",
+"state.abb": "MO" 
+},
+{
+ "Population":            746,
+"Income":           4347,
+"Illiteracy":            0.6,
+"Life.Exp":          70.56,
+"Murder":              5,
+"HS.Grad":           59.2,
+"Frost":            155,
+"Area":         145587,
+"state.division": "Mountain",
+"state.abb": "MT" 
+},
+{
+ "Population":           1544,
+"Income":           4508,
+"Illiteracy":            0.6,
+"Life.Exp":           72.6,
+"Murder":            2.9,
+"HS.Grad":           59.3,
+"Frost":            139,
+"Area":          76483,
+"state.division": "West North Central",
+"state.abb": "NE" 
+},
+{
+ "Population":            590,
+"Income":           5149,
+"Illiteracy":            0.5,
+"Life.Exp":          69.03,
+"Murder":           11.5,
+"HS.Grad":           65.2,
+"Frost":            188,
+"Area":         109889,
+"state.division": "Mountain",
+"state.abb": "NV" 
+},
+{
+ "Population":            812,
+"Income":           4281,
+"Illiteracy":            0.7,
+"Life.Exp":          71.23,
+"Murder":            3.3,
+"HS.Grad":           57.6,
+"Frost":            174,
+"Area":           9027,
+"state.division": "New England",
+"state.abb": "NH" 
+},
+{
+ "Population":           7333,
+"Income":           5237,
+"Illiteracy":            1.1,
+"Life.Exp":          70.93,
+"Murder":            5.2,
+"HS.Grad":           52.5,
+"Frost":            115,
+"Area":           7521,
+"state.division": "Middle Atlantic",
+"state.abb": "NJ" 
+},
+{
+ "Population":           1144,
+"Income":           3601,
+"Illiteracy":            2.2,
+"Life.Exp":          70.32,
+"Murder":            9.7,
+"HS.Grad":           55.2,
+"Frost":            120,
+"Area":         121412,
+"state.division": "Mountain",
+"state.abb": "NM" 
+},
+{
+ "Population":          18076,
+"Income":           4903,
+"Illiteracy":            1.4,
+"Life.Exp":          70.55,
+"Murder":           10.9,
+"HS.Grad":           52.7,
+"Frost":             82,
+"Area":          47831,
+"state.division": "Middle Atlantic",
+"state.abb": "NY" 
+},
+{
+ "Population":           5441,
+"Income":           3875,
+"Illiteracy":            1.8,
+"Life.Exp":          69.21,
+"Murder":           11.1,
+"HS.Grad":           38.5,
+"Frost":             80,
+"Area":          48798,
+"state.division": "South Atlantic",
+"state.abb": "NC" 
+},
+{
+ "Population":            637,
+"Income":           5087,
+"Illiteracy":            0.8,
+"Life.Exp":          72.78,
+"Murder":            1.4,
+"HS.Grad":           50.3,
+"Frost":            186,
+"Area":          69273,
+"state.division": "West North Central",
+"state.abb": "ND" 
+},
+{
+ "Population":          10735,
+"Income":           4561,
+"Illiteracy":            0.8,
+"Life.Exp":          70.82,
+"Murder":            7.4,
+"HS.Grad":           53.2,
+"Frost":            124,
+"Area":          40975,
+"state.division": "East North Central",
+"state.abb": "OH" 
+},
+{
+ "Population":           2715,
+"Income":           3983,
+"Illiteracy":            1.1,
+"Life.Exp":          71.42,
+"Murder":            6.4,
+"HS.Grad":           51.6,
+"Frost":             82,
+"Area":          68782,
+"state.division": "West South Central",
+"state.abb": "OK" 
+},
+{
+ "Population":           2284,
+"Income":           4660,
+"Illiteracy":            0.6,
+"Life.Exp":          72.13,
+"Murder":            4.2,
+"HS.Grad":             60,
+"Frost":             44,
+"Area":          96184,
+"state.division": "Pacific",
+"state.abb": "OR" 
+},
+{
+ "Population":          11860,
+"Income":           4449,
+"Illiteracy":              1,
+"Life.Exp":          70.43,
+"Murder":            6.1,
+"HS.Grad":           50.2,
+"Frost":            126,
+"Area":          44966,
+"state.division": "Middle Atlantic",
+"state.abb": "PA" 
+},
+{
+ "Population":            931,
+"Income":           4558,
+"Illiteracy":            1.3,
+"Life.Exp":           71.9,
+"Murder":            2.4,
+"HS.Grad":           46.4,
+"Frost":            127,
+"Area":           1049,
+"state.division": "New England",
+"state.abb": "RI" 
+},
+{
+ "Population":           2816,
+"Income":           3635,
+"Illiteracy":            2.3,
+"Life.Exp":          67.96,
+"Murder":           11.6,
+"HS.Grad":           37.8,
+"Frost":             65,
+"Area":          30225,
+"state.division": "South Atlantic",
+"state.abb": "SC" 
+},
+{
+ "Population":            681,
+"Income":           4167,
+"Illiteracy":            0.5,
+"Life.Exp":          72.08,
+"Murder":            1.7,
+"HS.Grad":           53.3,
+"Frost":            172,
+"Area":          75955,
+"state.division": "West North Central",
+"state.abb": "SD" 
+},
+{
+ "Population":           4173,
+"Income":           3821,
+"Illiteracy":            1.7,
+"Life.Exp":          70.11,
+"Murder":             11,
+"HS.Grad":           41.8,
+"Frost":             70,
+"Area":          41328,
+"state.division": "East South Central",
+"state.abb": "TN" 
+},
+{
+ "Population":          12237,
+"Income":           4188,
+"Illiteracy":            2.2,
+"Life.Exp":           70.9,
+"Murder":           12.2,
+"HS.Grad":           47.4,
+"Frost":             35,
+"Area":         262134,
+"state.division": "West South Central",
+"state.abb": "TX" 
+},
+{
+ "Population":           1203,
+"Income":           4022,
+"Illiteracy":            0.6,
+"Life.Exp":           72.9,
+"Murder":            4.5,
+"HS.Grad":           67.3,
+"Frost":            137,
+"Area":          82096,
+"state.division": "Mountain",
+"state.abb": "UT" 
+},
+{
+ "Population":            472,
+"Income":           3907,
+"Illiteracy":            0.6,
+"Life.Exp":          71.64,
+"Murder":            5.5,
+"HS.Grad":           57.1,
+"Frost":            168,
+"Area":           9267,
+"state.division": "New England",
+"state.abb": "VT" 
+},
+{
+ "Population":           4981,
+"Income":           4701,
+"Illiteracy":            1.4,
+"Life.Exp":          70.08,
+"Murder":            9.5,
+"HS.Grad":           47.8,
+"Frost":             85,
+"Area":          39780,
+"state.division": "South Atlantic",
+"state.abb": "VA" 
+},
+{
+ "Population":           3559,
+"Income":           4864,
+"Illiteracy":            0.6,
+"Life.Exp":          71.72,
+"Murder":            4.3,
+"HS.Grad":           63.5,
+"Frost":             32,
+"Area":          66570,
+"state.division": "Pacific",
+"state.abb": "WA" 
+},
+{
+ "Population":           1799,
+"Income":           3617,
+"Illiteracy":            1.4,
+"Life.Exp":          69.48,
+"Murder":            6.7,
+"HS.Grad":           41.6,
+"Frost":            100,
+"Area":          24070,
+"state.division": "South Atlantic",
+"state.abb": "WV" 
+},
+{
+ "Population":           4589,
+"Income":           4468,
+"Illiteracy":            0.7,
+"Life.Exp":          72.48,
+"Murder":              3,
+"HS.Grad":           54.5,
+"Frost":            149,
+"Area":          54464,
+"state.division": "East North Central",
+"state.abb": "WI" 
+},
+{
+ "Population":            376,
+"Income":           4566,
+"Illiteracy":            0.6,
+"Life.Exp":          70.29,
+"Murder":            6.9,
+"HS.Grad":           62.9,
+"Frost":            173,
+"Area":          97203,
+"state.division": "Mountain",
+"state.abb": "WY" 
+} 
+]
+  
+      if(!(opts.type==="pieChart" || opts.type==="sparklinePlus" || opts.type==="bulletChart")) {
+        var data = d3.nest()
+          .key(function(d){
+            //return opts.group === undefined ? 'main' : d[opts.group]
+            //instead of main would think a better default is opts.x
+            return opts.group === undefined ? opts.y : d[opts.group];
+          })
+          .entries(data);
+      }
+      
+      if (opts.disabled != undefined){
+        data.map(function(d, i){
+          d.disabled = opts.disabled[i]
+        })
+      }
+      
+      nv.addGraph(function() {
+        var chart = nv.models[opts.type]()
+          .width(opts.width)
+          .height(opts.height)
+          
+        if (opts.type != "bulletChart"){
+          chart
+            .x(function(d) { return d[opts.x] })
+            .y(function(d) { return d[opts.y] })
+        }
+          
+         
+        
+          
+        
+
+        
+        
+        
+      
+       d3.select("#" + opts.id)
+        .append('svg')
+        .datum(data)
+        .transition().duration(500)
+        .call(chart);
+
+       nv.utils.windowResize(chart.update);
+       return chart;
+      });
+    };
+</script>
+
+<p>Figure: Murder rate of all states grouped by state division</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Customize views</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Select division and statistic to update the chart interactively</p>
+
+<ul>
+<li>Quick interactive access to relevant data</li>
+<li>Easy comparison ability</li>
+<li>Quick access to information</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Questions?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/ask-the-right-questions.jpg" style="width: 650px;margin-left: 300px;margin-top: 14px;"/></p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -87,8 +826,26 @@
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Slide 2'>
+        data-slide=2 title='Comparing Data'>
          2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Zoom into divisions'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Customize views'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Questions?'>
+         5
       </a>
     </li>
   </ul>
@@ -100,7 +857,32 @@
   <![endif]-->
 </body>
   <!-- Load Javascripts for Widgets -->
-  
+  <script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
   <!-- LOAD HIGHLIGHTER JS FILES -->
   <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
